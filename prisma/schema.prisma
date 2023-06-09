@@ -1,0 +1,32 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider        = "prisma-client-js"
+  previewFeatures = ["clientExtensions"]
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model ApplicationIdentifier {
+  id           String         @id @default(dbgenerated("generate_uuid7()")) @db.Uuid
+  createdAt    DateTime?
+  Applications Applications[]
+}
+
+model Applications {
+  id                    String                @id @db.Uuid
+  applicationIdentifier ApplicationIdentifier @relation(fields: [id], references: [id])
+  name                  String?               @db.VarChar(75)
+  appId                 String?               @unique @db.VarChar(255)
+  appKey                String?               @db.VarChar(500)
+  createdAt             DateTime?
+  updatedAt             DateTime?
+  deletedAt             DateTime?
+  lastEventId           String                @db.Uuid
+
+  @@index([deletedAt])
+}

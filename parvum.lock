@@ -1,0 +1,52 @@
+{
+    "events": {
+        "id": 103815340,
+        "url": "https://api.github.com/repos/parvum-lambda/events/releases/103815340",
+        "node_id": "RE_kwDOI5dQus4GMBis",
+        "tag_name": "v1.0.0-alpha.4",
+        "target_commitish": "alpha",
+        "name": "v1.0.0-alpha.4",
+        "prerelease": true,
+        "latest": false,
+        "created_at": "2023-05-22T13:37:44Z",
+        "published_at": "2023-05-22T13:37:52Z",
+        "tarball_url": "https://api.github.com/repos/parvum-lambda/events/tarball/v1.0.0-alpha.4",
+        "zipball_url": "https://api.github.com/repos/parvum-lambda/events/zipball/v1.0.0-alpha.4",
+        "assets": [
+            {
+                "url": "https://api.github.com/repos/parvum-lambda/events/releases/assets/109270074",
+                "id": 109270074,
+                "node_id": "RA_kwDOI5dQus4Gg1Q6",
+                "name": "docker-compose.yml",
+                "label": "Parvum compose file",
+                "uploader": {
+                    "login": "k1ske",
+                    "id": 28577739,
+                    "node_id": "MDQ6VXNlcjI4NTc3NzM5",
+                    "avatar_url": "https://avatars.githubusercontent.com/u/28577739?v=4",
+                    "gravatar_id": "",
+                    "url": "https://api.github.com/users/k1ske",
+                    "html_url": "https://github.com/k1ske",
+                    "followers_url": "https://api.github.com/users/k1ske/followers",
+                    "following_url": "https://api.github.com/users/k1ske/following{/other_user}",
+                    "gists_url": "https://api.github.com/users/k1ske/gists{/gist_id}",
+                    "starred_url": "https://api.github.com/users/k1ske/starred{/owner}{/repo}",
+                    "subscriptions_url": "https://api.github.com/users/k1ske/subscriptions",
+                    "organizations_url": "https://api.github.com/users/k1ske/orgs",
+                    "repos_url": "https://api.github.com/users/k1ske/repos",
+                    "events_url": "https://api.github.com/users/k1ske/events{/privacy}",
+                    "received_events_url": "https://api.github.com/users/k1ske/received_events",
+                    "type": "User",
+                    "site_admin": false
+                },
+                "content_type": "text/yaml",
+                "state": "uploaded",
+                "size": 970,
+                "download_count": 0,
+                "created_at": "2023-05-22T13:37:49Z",
+                "updated_at": "2023-05-22T13:37:49Z",
+                "browser_download_url": "https://github.com/parvum-lambda/events/releases/download/v1.0.0-alpha.4/docker-compose.yml"
+            }
+        ]
+    }
+}

@@ -1,0 +1,64 @@
+version: "3.8"
+
+volumes:
+  applications-pgsql:
+    driver: local
+
+networks:
+  parvum:
+    external: true
+    name: ${PARVUM_NETWORK}
+  applications:
+    driver: bridge
+
+services:
+  applications:
+    build:
+      context: .docker/nodejs/18
+      dockerfile: Dockerfile
+    container_name: "parvum.dev-${PARVUM_SERVICE_NAME}"
+    extra_hosts:
+      - 'host.docker.internal:host-gateway'
+      - 'parvum.events:${PARVUM_SERVICE_EVENTS_IP}'
+    ports:
+      - "3000:3000"
+      - "9229:9229"
+    volumes:
+      - ".:/app"
+    networks:
+      parvum:
+        ipv4_address: ${PARVUM_IPV4_ADDRESS}
+      applications:
+    depends_on:
+      - pgsql
+      - dynamodb
+
+  pgsql:
+    image: 'postgres:15'
+    container_name: "parvum.dev-${PARVUM_SERVICE_NAME}-pgsql"
+    ports:
+      - '${FORWARD_DB_PORT:-5432}:5432'
+    environment:
+      PGPASSWORD: '${DB_PASSWORD:-secret}'
+      POSTGRES_DB: '${DB_DATABASE}'
+      POSTGRES_USER: '${DB_USERNAME}'
+      POSTGRES_PASSWORD: '${DB_PASSWORD:-secret}'
+    volumes:
+      - 'applications-pgsql:/var/lib/postgresql/data'
+    networks:
+      applications:
+    healthcheck:
+      test: [ "CMD", "pg_isready", "-q", "-d", "${DB_DATABASE}", "-U", "${DB_USERNAME}" ]
+      retries: 3
+      timeout: 5s
+
+  dynamodb:
+    image: amazon/dynamodb-local
+    container_name: "parvum.dev-${PARVUM_SERVICE_NAME}-dynamodb"
+    hostname: dynamodb
+    restart: always
+    volumes:
+      - ./.docker/.data/dynamodb:/home/dynamodblocal/data
+    command: "-jar DynamoDBLocal.jar -sharedDb -dbPath /home/dynamodblocal/data/"
+    networks:
+      - applications
